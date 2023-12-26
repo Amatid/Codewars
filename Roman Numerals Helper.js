@@ -14,8 +14,7 @@ class RomanNumerals {
         return;
       }
       if (figure < 4) {
-        result = result + fillUnits(figure, result, ROMANNUMBERS, index);
-
+        result = fillUnits(figure, result, ROMANNUMBERS, index);
         return;
       }
       if (figure === 4) {
@@ -24,7 +23,7 @@ class RomanNumerals {
       }
       if (figure < 9) {
         figure = figure - 5;
-        result = result + fillUnits(figure, result, ROMANNUMBERS, index);
+        result = fillUnits(figure, result, ROMANNUMBERS, index);
         result = ROMANNUMBERS[index][1];
         return;
       }
