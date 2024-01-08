@@ -18,13 +18,13 @@ class RomanNumerals {
         return;
       }
       if (figure === 4) {
-        result = ROMANNUMBERS[index][1] + ROMANNUMBERS[index][0];
+        result = result + ROMANNUMBERS[index][1] + ROMANNUMBERS[index][0];
         return;
       }
       if (figure < 9) {
         figure = figure - 5;
         result = fillUnits(figure, result, ROMANNUMBERS, index);
-        result = ROMANNUMBERS[index][1];
+        result = result + ROMANNUMBERS[index][1];
         return;
       }
       if (figure === 9) {
@@ -43,6 +43,19 @@ class RomanNumerals {
     }
   }
   static fromRoman(str) {
-    return 4;
+    const ROMANNUMBERS = { M: 1000, D: 500, C: 100, L: 50, X: 10, V: 5, I: 1 };
+    const PREVIEWNUMBERS = ['C', 'X', 'I'];
+    let result = 0;
+    const strToArray = str.split('');
+    for (let i = 0; i < strToArray.length; i++) {
+      let common = strToArray[i];
+      let preview = strToArray[i - 1];
+      if ((PREVIEWNUMBERS.some(element => element === preview)) && ROMANNUMBERS[preview] < ROMANNUMBERS[common]) {
+        result = result + ROMANNUMBERS[common] - ROMANNUMBERS[preview] - ROMANNUMBERS[preview];
+      } else {
+        result = result + ROMANNUMBERS[common];
+      }
+    }
+    return result;
   }
 }
